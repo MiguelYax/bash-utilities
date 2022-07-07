@@ -1,6 +1,8 @@
+#!/bin/bash
+
 if [[ "$1" == "" ]];
 then 
-  echo "Usage: bash +x install.sh <targetFile>"
+  echo "Usage: ./install.sh <targetFile>"
   echo "Example:"
   echo "         ./install.sh ~/.bashrc"
   echo "         ./install.sh ~/.zshrc"
