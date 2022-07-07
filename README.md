@@ -9,28 +9,19 @@ git clone https://github.com/MiguelYax/bash-utilities.git ~/dev/github/bash-util
 
 ```
 
-### Add local .bashrc to your shell file
+### Add bash-utilities config to your shell file configuration
 
-- Load temporal current .bashrc 
+- Add execution permisions
 ```bash
-cd ~/dev/github/bash-utilities && source main.sh
+chmod +x install.sh
 ```
+
 - Add to .bashrc
 ```bash
- addTo main.sh ~/.bashrc "Custom bash utilities"
-```
-
-- Add to .bash_profile
-```bash
-addTo main.sh ~/.bash_profile "Custom bash utilities"
-```
-
-- Add to .zprofile
-```bash
-addTo main.sh ~/.zprofile "Custom bash utilities"  
+ ./install.sh ~/.bashrc
 ```
 
 - Add to .zshrc
 ```bash
-addTo main.sh ~/.zshrc "Custom bash utilities"
+ ./install.sh ~/.zshrc
 ```

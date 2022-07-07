@@ -118,7 +118,8 @@ addTo() {
   then
     currentDir=$(pwd)
     bashFile="$currentDir/$1"
-    echo "\n## $3" >> "$2"
+    echo "" >> "$2"
+    echo "## $3" >> "$2"
     echo ""'[ -s '"$bashFile"' ] && \. '"$bashFile"'' >> "$2"
   else
     echo "Usage: $(basename $0) <bashFile> <bashrcFile> <comment>"
