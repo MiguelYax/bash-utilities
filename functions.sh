@@ -1,94 +1,47 @@
 #!/bin/bash
 
-#################### GLOBAL #################### 
-
-BLANK="";
-
-
 #################### FUNCTIONS #################### 
 # log directory
-ld () {
-  d=$(date +%Y%m%d)
 
-  if  [[ "$1" == "$BLANK" ]];
-  then 
-    fileName="$d"
-  else 
-    fileName="$d-$1"
-  fi
+function logd () {
+  local logDirectory=$(date +%Y-%m-%d)
   
-  echo "$fileName"
-
-  mkdir "$fileName" && cd "$fileName"
+  [ ! -z "$1" ] && logDirectory+="-$1"
+  
+  echo "Generating: $logDirectory"
+  mkdir $logDirectory && cd $logDirectory
 }
 
-#LOG FILE
+#log file
 
-lf () {
-  d=$(date +%Y%m%d)
-
-  if  [[ "$1" == "$BLANK" ]];
-  then 
-    fileName="$d.log"
-  else 
-    fileName="$d-$1.log"
-  fi
-
-  vim "$fileName"
-}
-
-tf () {
-  d=$(date +%Y%m%d%H%M)
-
-  if  [[ "$1" == "$BLANK" ]];
-  then 
-    fileName="$d.txt"
-  else 
-    fileName="$d.$1"
-  fi
-
-  vim "$fileName"
-}
-
-fd () {
-  if  [[ "$1" == "$BLANK" ]];
-  then 
-    echo "Usage: fd <fileName>"
-  else 
-    find . -iname "*$1*"
-  fi
-}
-
-
-sshkey () {
-  if  [[ "$1" == "$BLANK" ]];
-  then 
-    echo "Usage: sshkey <email>"
-  else 
-    ssh-keygen -t rsa -b 4096 -C "$1"
-  fi    
+logf () {
+  local fileName=$(date +%Y-%m-%d)
+  
+  [ ! -z "$1" ] && fileName+="-$1"
+  
+  vim "$fileName.log"
 }
 
 #################### git ####################
 
-gnf () {
-  if  [[ "$1" == "$BLANK" ]];
+# git new feature
+function gnf () {
+  local name="$1"
+  if  [[ "$name" == "" ]];
   then 
     echo "Usage : $(basename $0) <featureName>"
   else         
-    git checkout -b "feature/$1" 
+    git checkout -b "feature/$name" 
   fi
 }
 
-gbm() {
-  if  [[ "$1" == "$BLANK" ]];
-  then
-    targetBranch="develop"
-  else 
-    targetBranch=$1
-  fi
+# git branch merge
+function gbm() {
+  local targetBranch='develop'
 
-  currentBranch=$(git branch --show-current) &&
+  [ ! -z "$1" ] && targetBranch=$1
+
+  local currentBranch=$(git branch --show-current) &&
   git pull &&
   git checkout $targetBranch &&
   git pull &&
@@ -96,15 +49,17 @@ gbm() {
   git merge $targetBranch
 }
 
-gpb() {
+# git push branch
+function gpb() {
   currentBranch=$(git branch --show-current) &&
   git push --set-upstream origin $currentBranch
 }
 
-gac() {
+# git add . and commit
+function gac() {
   if  [[ $# -gt 3 ]];
   then 
-    message="$*"     
+    local message="$*"     
     git add . && git commit -m "$message"
   else 
     echo "Usage : $(basename $0) <commitMessage>"
@@ -113,13 +68,13 @@ gac() {
 
 #################### shell ####################
 
-addTo() {
+function addTo() {
   if [[ $# == 3 ]];
   then
-    currentDir=$(pwd)
-    bashFile="$currentDir/$1"
+    local currentDir=$(pwd)
+    local bashFile="$currentDir/$1"
     echo "" >> "$2"
-    echo "## $3" >> "$2"
+    echo "#################### $3 ####################" >> "$2"
     echo ""'[ -s '"$bashFile"' ] && \. '"$bashFile"'' >> "$2"
   else
     echo "Usage: $(basename $0) <bashFile> <bashrcFile> <comment>"
