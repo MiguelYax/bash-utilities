@@ -35,6 +35,18 @@ function gnf () {
   fi
 }
 
+# git new issue
+function gni () {
+  local name="$1"
+  if  [[ "$name" == "" ]];
+  then 
+    echo "Usage : $(basename $0) <issueName>"
+  else         
+    git checkout -b "issue/$name" 
+  fi
+}
+
+
 # git branch merge
 function gbm() {
   local targetBranch='develop'
