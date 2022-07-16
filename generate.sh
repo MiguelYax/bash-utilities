@@ -1,8 +1,14 @@
 #!/bin/bash
 
 echo "Generating configuration..."
-echo "#\!/bin/bash" > config.sh
-echo "# BASH UTILITIES CONFIGURATION" >> config.sh
+
+{
+echo "#!/bin/bash" 
+echo ""
+echo "# BASH UTILITIES CONFIGURATION"
+} > config.sh
+
+
 
 source ./functions.sh
 

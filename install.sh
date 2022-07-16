@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ "$1" == "" ]];
+if [ -z "$1" ];
 then 
   echo "Usage: ./install.sh <targetFile>"
   echo "Example:"
@@ -9,5 +9,5 @@ then
 else
   source ./generate.sh
   echo "Adding configuration to $1"
-  addTo config.sh $1 "Bash utilities configuration"
+  addTo config.sh "$1" "Bash utilities configuration"
 fi

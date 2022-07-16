@@ -4,9 +4,9 @@
 # Required packages: cowsay, fortune, and lolcat
 
 function rcs (){
-  local options=("b" "d" "g" "p" "s" "t" "w" "y")
-  local index=$(( $RANDOM % ${#options[@]} + 1))
-  local randomModeCowsay="cowsay -${options[index]}"
+  declare -a options=(b d g p s t w y)
+  mode=${options[ $RANDOM % ${#options[@]} ]}
+  randomModeCowsay="cowsay -$mode"
 
-  fortune -s | eval $randomModeCowsay | lolcat
+  fortune -s | eval "$randomModeCowsay" | lolcat
 }

@@ -4,20 +4,20 @@
 # log directory
 
 function logd () {
-  local logDirectory=$(date +%Y-%m-%d)
+  logDirectory=$(date +%Y-%m-%d)
   
-  [ ! -z "$1" ] && logDirectory+="-$1"
+  [ -n "$1" ] && logDirectory+="-$1"
   
   echo "Generating: $logDirectory"
-  mkdir $logDirectory && cd $logDirectory
+  mkdir "$logDirectory" && cd "$logDirectory" || exit
 }
 
 #log file
 
 logf () {
-  local fileName=$(date +%Y-%m-%d)
+  fileName=$(date +%Y-%m-%d)
   
-  [ ! -z "$1" ] && fileName+="-$1"
+  [ -n "$1" ] && fileName+="-$1"
   
   vim "$fileName.log"
 }
@@ -27,9 +27,9 @@ logf () {
 # git new feature
 function gnf () {
   local name="$1"
-  if  [[ "$name" == "" ]];
+  if  [ -z "$name" ];
   then 
-    echo "Usage : $(basename $0) <featureName>"
+    echo "Usage : $(basename "$0") <featureName>"
   else         
     git checkout -b "feature/$name" 
   fi
@@ -38,9 +38,9 @@ function gnf () {
 # git new issue
 function gni () {
   local name="$1"
-  if  [[ "$name" == "" ]];
+  if  [ -z "$name" ];
   then 
-    echo "Usage : $(basename $0) <issueName>"
+    echo "Usage : $(basename "$0") <issueName>"
   else         
     git checkout -b "issue/$name" 
   fi
@@ -51,20 +51,20 @@ function gni () {
 function gbm() {
   local targetBranch='develop'
 
-  [ ! -z "$1" ] && targetBranch=$1
+  [ -n "$1" ] && targetBranch=$1
 
-  local currentBranch=$(git branch --show-current) &&
+  currentBranch=$(git branch --show-current) &&
   git pull &&
-  git checkout $targetBranch &&
+  git checkout "$targetBranch" &&
   git pull &&
-  git checkout $currentBranch &&
-  git merge $targetBranch
+  git checkout "$currentBranch" &&
+  git merge "$targetBranch"
 }
 
 # git push branch
 function gpb() {
   currentBranch=$(git branch --show-current) &&
-  git push --set-upstream origin $currentBranch
+  git push --set-upstream origin "$currentBranch"
 }
 
 # git add . and commit
@@ -74,7 +74,7 @@ function gac() {
     local message="$*"     
     git add . && git commit -m "$message"
   else 
-    echo "Usage : $(basename $0) <commitMessage>"
+    echo "Usage : $(basename "$0") <commitMessage>"
   fi
 }
 
@@ -83,13 +83,15 @@ function gac() {
 function addTo() {
   if [[ $# == 3 ]];
   then
-    local currentDir=$(pwd)
-    local bashFile="$currentDir/$1"
-    echo "" >> "$2"
-    echo "#################### $3 ####################" >> "$2"
-    echo ""'[ -s '"$bashFile"' ] && \. '"$bashFile"'' >> "$2"
+    currentDir=$(pwd)
+    bashFile="$currentDir/$1"
+    {
+      echo ""
+      echo "#################### $3 ####################"
+      echo ""'[ -s '"$bashFile"' ] && \. '"$bashFile"''
+    } >> "$2"
   else
-    echo "Usage: $(basename $0) <bashFile> <bashrcFile> <comment>"
+    echo "Usage: $(basename "$0") <bashFile> <bashrcFile> <comment>"
   fi
 }
 
