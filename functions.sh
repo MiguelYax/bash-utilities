@@ -88,7 +88,7 @@ function addTo() {
     {
       echo ""
       echo "#################### $3 ####################"
-      echo ""'[ -s '"$bashFile"' ] && \. '"$bashFile"''
+      echo "[ -s $bashFile ] && source $bashFile"
     } >> "$2"
   else
     echo "Usage: $(basename "$0") <bashFile> <bashrcFile> <comment>"
