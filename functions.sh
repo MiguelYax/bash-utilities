@@ -95,3 +95,13 @@ function addTo() {
   fi
 }
 
+# surfire reports finder
+function sfr () {
+  if [ -z "$1" ]
+    then
+      echo "Surfire-reports finder"
+      echo "Usage : $(basename $0) <Class name>"
+    else
+      find "$(pwd -P)" -type f -name "*$1*.txt" | xargs code
+    fi
+}

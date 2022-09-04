@@ -18,8 +18,8 @@ alias grh='git reset --hard HEAD'
 ## DOCKER
 
 alias dkps="docker ps"
-# alias dkst="docker stop $(docker ps -a -q)"
-# alias dkrm="docker rm $(docker ps -a -q)"
+alias dkst="docker ps -a -q | xargs docker stop"
+alias dkrm="docker ps -a -q | xargs docker rm"
 alias dkfn='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}"'
 alias dkfs='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.RunningFor}}\t{{.Status}}"'
 
@@ -39,3 +39,7 @@ alias nug="npm uninstall --global "
 alias nci="npm ci "
 alias nrl="npm run lint "
 alias nlf="npm run lint:fix "
+
+## UTILS
+
+alias ls="exa --icons  --group-directories-first "
