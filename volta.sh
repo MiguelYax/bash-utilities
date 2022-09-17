@@ -38,22 +38,18 @@ volta_nvm_find_package_json() {
 export VOLTA_DEFAULT_NODE_VERSION="$(volta list node --format=plain | tail -1 | cut -d' ' -f2)"
 
 load-volta() {
-
   if [ -f "$(volta_nvm_find_package_json)" ] && jq -e '.volta | has("node")' "$(volta_nvm_find_package_json)" > /dev/null; then
-     echo "Found pinned node version in package.json, skipping .nvmrc"
+     : # native volta
   else
   local nvmrc_path="$(volta_nvm_find_nvmrc)"
   local node_version="$(node -v | sed 's/v/node@/')"
     if [ -n "$nvmrc_path" ]; then
       local nvmrc_node_version="$(cat "${nvmrc_path}")"
-
-      if [ "$nvmrc_node_version" = "N/A" ]; then
-        volta install "$VOLTA_DEFAULT_NODE_VERSION"
-      elif [ "$nvmrc_node_version" != "$node_version" ]; then
-        volta install "node@$(cat "${nvmrc_path}")"
+      if [ -n "$nvmrc_node_version" ]; then
+        volta install --quiet "node@$nvmrc_node_version"
       fi
     elif [ "$node_version" != "$VOLTA_DEFAULT_NODE_VERSION" ]; then
-      volta install "$VOLTA_DEFAULT_NODE_VERSION"
+      volta install --quiet "$VOLTA_DEFAULT_NODE_VERSION"
     fi
   fi
 }
