@@ -54,5 +54,7 @@ load-volta() {
   fi
 }
 
-add-zsh-hook chpwd load-volta
+[ -n "$ZSH_NAME" ] && add-zsh-hook chpwd load-volta
+[ -n "$BASH" ] && PROMPT_COMMAND="load-volta${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+
 load-volta
