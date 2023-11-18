@@ -41,5 +41,4 @@ alias nrl="npm run lint "
 alias nlf="npm run lint:fix "
 
 ## UTILS
-
-alias ls="exa --icons  --group-directories-first "
+## alias ls="exa --icons  --group-directories-first "
