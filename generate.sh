@@ -14,4 +14,5 @@ source ./functions.sh
 addTo alias.sh "$CONFIG_FILE" "Alias file"
 addTo functions.sh "$CONFIG_FILE" "Functions file"
 addTo bonus.sh "$CONFIG_FILE" "Bonus file"
+addTo spaceship.sh "$CONFIG_FILE" "Spaceship prompt file"
 ## addTo volta.sh "$CONFIG_FILE" "Volta enhance for nvmrc file"
