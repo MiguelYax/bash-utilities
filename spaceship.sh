@@ -14,7 +14,7 @@ fi
     dir            # Current directory section
     host           # Hostname section
     git            # Git section (git_branch + git_status)
-    hg             # Mercurial section (hg_branch  + hg_status)
+    # hg             # Mercurial section (hg_branch  + hg_status)
     # package        # Package version
     node           # Node.js section
     # bun            # Bun section
