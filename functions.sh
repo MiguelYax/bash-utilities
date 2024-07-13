@@ -30,8 +30,13 @@ function gnf () {
   if  [ -z "$name" ];
   then 
     echo "Usage : $(basename "$0") <featureName>"
-  else         
-    git checkout -b "feature/$name" 
+  else
+    if [[ $name == "feature/"* ]];
+    then
+      git checkout -b "$name"
+    else 
+      git checkout -b "feature/$name" 
+    fi
   fi
 }
 
@@ -42,7 +47,12 @@ function gni () {
   then 
     echo "Usage : $(basename "$0") <issueName>"
   else         
-    git checkout -b "issue/$name" 
+    if [[ $name == "issue/"* ]];
+    then
+      git checkout -b "$name"
+    else 
+      git checkout -b "issue/$name" 
+    fi
   fi
 }
 
