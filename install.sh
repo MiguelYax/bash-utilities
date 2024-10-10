@@ -7,7 +7,6 @@ then
   echo "         ./install.sh ~/.bashrc"
   echo "         ./install.sh ~/.zshrc"
 else
-  source ./generate.sh
   echo "Adding configuration to $1"
   addTo config.sh "$1" "Bash utilities configuration"
 fi
