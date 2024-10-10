@@ -1,7 +1,6 @@
 #!/bin/bash
 
-export BU_PATH=$(pwd)
-export BU_CONFIG=(
+BU_CONFIG=(
     alias
     functions
     # bonus
