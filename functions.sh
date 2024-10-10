@@ -24,6 +24,10 @@ logf () {
 
 #################### git ####################
 
+function defaultBranch () {
+  git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+}
+
 # git new feature
 function gnf () {
   local name="$1"
@@ -59,7 +63,7 @@ function gni () {
 
 # git branch merge
 function gbm() {
-  local targetBranch='develop'
+  local targetBranch=$(defaultBranch)
 
   [ -n "$1" ] && targetBranch=$1
 
@@ -114,4 +118,8 @@ function sfr () {
     else
       find "$(pwd -P)" -type f -name "*$1*.txt" | xargs code
     fi
+}
+
+function gm () {
+  git checkout $(defaultBranch)
 }
