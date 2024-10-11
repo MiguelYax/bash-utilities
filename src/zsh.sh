@@ -36,7 +36,7 @@ if [[ $0 == *"zsh"* ]]; then
   ### --- Spaceship Config ------------------------------------
 
   SPACESHIP_PROMPT_ORDER=(
-    # user          # Username section
+    user          # Username section
     dir           # Current directory section
     host          # Hostname section
     git           # Git section (git_branch + git_status)
@@ -46,7 +46,7 @@ if [[ $0 == *"zsh"* ]]; then
     # vi_mode       # Vi-mode indicator
     # jobs          # Background jobs indicator
     exit_code     # Exit code section
-    char          # Prompt character
+    # char          # Prompt character
   )
 
 fi
