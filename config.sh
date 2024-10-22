@@ -5,6 +5,7 @@ BU_CONFIG=(
     functions
     # bonus
     zsh
+    volta
  )
 
 for util in "${BU_CONFIG[@]}"; do

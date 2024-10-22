@@ -8,9 +8,6 @@ if [[ $0 == *"zsh"* ]]; then
 
   mkdir -p $ZSH_PLUGINS_PATH $ZSH_THEMES_PATH
 
-  # HISTORY
-  # [ -s ~/.zsh_history ] && mv ~/.zsh_history $ZSH_PATH
-
   # THEMES
   [ ! -d "$ZSH_THEMES_PATH/spaceship-prompt" ] && git clone https://github.com/spaceship-prompt/spaceship-prompt.git $ZSH_THEMES_PATH/spaceship-prompt
 
@@ -27,6 +24,11 @@ if [[ $0 == *"zsh"* ]]; then
   setopt SHARE_HISTORY
   setopt HIST_IGNORE_ALL_DUPS
   setopt HIST_FIND_NO_DUPS
+  setopt APPENDHISTORY
+
+  [ -s ~/.zsh_history ] && mv ~/.zsh_history $ZSH_PATH
+  export HISTFILE=$ZSH_PATH/.zsh_history 
+
 
   ### ---- PLUGINS & THEMES -----------------------------------
   source $ZSH/themes/spaceship-prompt/spaceship.zsh-theme
