@@ -9,6 +9,6 @@ BU_CONFIG=(
  )
 
 for util in "${BU_CONFIG[@]}"; do
-    local file="$BU_PATH/src/$util.sh"
+    file="$BU_PATH/src/$util.sh"
     [ -s $file ] && source $file
 done
